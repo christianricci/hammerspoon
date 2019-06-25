@@ -34,24 +34,27 @@ local clipboard_history = {} --If no history is saved on the system, create an e
 
 -- Load commands from file
 local source_commands = hs.fs.currentDir() .. "/revcom.list"
-print(source_commands)
-local file = io.open(source_commands)
-local i = 0
-local row = ""
 
-if file then
-    for line in file:lines() do
-      if line == "]]" then
-         i = i + 1
-         clipboard_history[i] = row:gsub("\n$", "")
-         row = ""
-      else
-         row = row .. line .. "\n"
-      end
-    end
-    file:close()
-else
-    error('file not found')
+-- Load commands
+function loadCommands()
+   file = io.open(source_commands)
+   i = 0
+   row = ""
+
+   if file then
+       for line in file:lines() do
+         if line == "]]" then
+            i = i + 1
+            clipboard_history[i] = row:gsub("\n$", "")
+            row = ""
+         else
+            row = row .. line .. "\n"
+         end
+       end
+       file:close()
+   else
+       error('file not found')
+   end
 end
 
 -- Append a history counter to the menu
@@ -75,18 +78,20 @@ function putOnPaste(string,key)
          hs.eventtap.keyStrokes(string) -- Defeating paste blocking http://www.hammerspoon.org/go/#pasteblock
       else
          pasteboard.setContents(string)
-         --last_change = pasteboard.changeCount() -- Updates last_change to prevent item duplication when putting on paste
+         last_change = pasteboard.changeCount() -- Updates last_change to prevent item duplication when putting on paste
       end
    end
 end
 
 -- Clears the clipboard and history
-function clearAll()
+function reloadAll()
    pasteboard.clearContents()
    clipboard_history = {}
    settings.set("so.victor.hs.jumpcut",clipboard_history)
    now = pasteboard.changeCount()
+   loadCommands()
    setTitle()
+   jumpcut:setMenu(populateMenu)
 end
 
 -- Clears the last added to the history
@@ -124,7 +129,7 @@ populateMenu = function(key)
    end-- end if else
    -- footer
    table.insert(menuData, {title="-"})
-   table.insert(menuData, {title="Clear All", fn = function() clearAll() end })
+   table.insert(menuData, {title="Reload All", fn = function() reloadAll() end })
    if (key.alt == true or pasteOnSelect) then
       table.insert(menuData, {title="Direct Paste Mode ✍", disabled=true})
    end
@@ -151,6 +156,7 @@ end
 --timer:start()
 
 setTitle() --Avoid wrong title if the user already has something on his saved history
+reloadAll()
 jumpcut:setMenu(populateMenu)
 
 hs.hotkey.bind({"cmd", "control", "shift"}, "v", function() jumpcut:popupMenu(hs.mouse.getAbsolutePosition()) end)
