@@ -1,6 +1,33 @@
-Name: Reverse Command Search (revcom)
+## Reverse Command Search (revcom)
 
-Description: based on clipboard.lua, the idea is to keep a list of common commands in the clipboard.
-             make sure to edit the source_commands variable and edit the file
+__Description:__ 
+Based on clipboard.lua, the idea is to keep a list of common commands in the clipboard. Make sure to edit the source_commands variable and edit the file
 
-Add it to you init.lua with: require 'revcom.lua'
+__Setup:__
+Add it to you init.lua with 
+```
+require 'revcom.lua'
+```
+__Commands File:__
+Create a file like
+```
+~/.hammerspoon/revcom.list
+```
+__Format:__
+```
+command1
+]]
+command2
+]]
+```
+__example:__ (use ]] to separate the file
+```
+# List all my files #
+ls -lrt
+echo "List of files in current dir"
+]]
+# Reboot the host #
+sudo reboot
+]]
+```
+Then you can grab the command by pressing CTRL+SHIFT+CMD+v, select the command, then press CTRL+v in the shell
