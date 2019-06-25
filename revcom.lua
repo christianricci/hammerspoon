@@ -43,7 +43,7 @@ function loadCommands()
 
    if file then
        for line in file:lines() do
-         if line == "]]" then
+         if line == "--END--" then
             i = i + 1
             clipboard_history[i] = row:gsub("\n$", "")
             row = ""
