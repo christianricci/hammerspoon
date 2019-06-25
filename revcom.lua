@@ -43,7 +43,7 @@ if file then
     for line in file:lines() do
       if line == "]]" then
          i = i + 1
-         clipboard_history[i] = row
+         clipboard_history[i] = row:gsub("\n$", "")
          row = ""
       else
          row = row .. line .. "\n"
