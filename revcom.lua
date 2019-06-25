@@ -60,9 +60,9 @@ end
 -- Append a history counter to the menu
 function setTitle()
    if (#clipboard_history == 0) then
-      jumpcut:setTitle("pɯɔ") -- Unicode magic
+      jumpcut:setTitle("ɹ^ןɹʇɔ") -- Unicode magic
    else
-      jumpcut:setTitle("pɯɔ") -- Unicode magic
+      jumpcut:setTitle("ɹ^ןɹʇɔ") -- Unicode magic
       --      jumpcut:setTitle("✂ ("..#clipboard_history..")") -- updates the menu counter
    end
 end
