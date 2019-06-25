@@ -20,7 +20,7 @@ command1
 command2
 ]]
 ```
-__example:__ (use ]] to separate the file
+__example:__ use ]] to separate each command, it accept multiline commands
 ```
 # List all my files #
 ls -lrt
