@@ -16,18 +16,18 @@ Create a file like
 __Format:__
 ```
 command1
-]]
+--END--
 command2
-]]
+--END--
 ```
-__example:__ use ]] to separate each command, it accept multiline commands
+__example:__ use --END-- to separate each command, it accept multiline commands
 ```
 # List all my files #
 ls -lrt
 echo "List of files in current dir"
-]]
+--END--
 # Reboot the host #
 sudo reboot
-]]
+--END--
 ```
 Then you can grab the command by pressing CTRL+SHIFT+CMD+v, select the command, then press CTRL+v in the shell
