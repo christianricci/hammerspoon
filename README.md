@@ -6,7 +6,7 @@ Based on clipboard.lua, the idea is to keep a list of common commands in the cli
 __Setup:__
 Add it to you init.lua with 
 ```
-require 'revcom.lua'
+require 'revcom'
 ```
 __Commands File:__
 Create a file like
