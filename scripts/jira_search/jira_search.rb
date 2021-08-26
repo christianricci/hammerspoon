@@ -9,8 +9,8 @@ require 'tty-table'
 # ruby -r pry <file.rb> <args>
 # binding.pry
 
-webserver=""
-cookie="full-path-to-cookie"
+webserver="replace-here"
+cookie="replace-here-full-path-to-cookie"
 search_input = ARGV.join('+')
 search_url = "https://#{webserver}/secure/QuickSearch.jspa?searchString=#{search_input}"
 command = "curl --insecure --silent -L --cookie #{cookie} --cookie-jar #{cookie} #{search_url} -o search.html"
